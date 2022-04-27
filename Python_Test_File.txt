@@ -1,0 +1,225 @@
+>>> fo=open("PYTHON_TEST_FILE.txt","r+")  
+>>> fo.read().replace("Basketball","Baseball")
+'I love playing basketball'
+>>> import os
+>>> os.listdir('.')
+['.git', 'clixx_db_vers_1.0_gap_joycelyne.sql', 'copy_file.py', 'JSON', 'Python_Test_File.txt', 'user_info.py', 'user_profile.py']
+>>> for x in os.listdir('.')
+  File "<stdin>", line 1     
+    for x in os.listdir('.') 
+
+
+for x in os.listdir('.'):
+...    if x=="Python_Test_File.txt":        
+...        fo=open("Python_Test_File.txt","r+") 
+...        str=fo.read()
+...        print(str)
+... 
+I love playing basketball
+
+
+
+>>> for x in os.listdir('.'):
+...    if x=="Python_Test_File.txt": 
+...        fo=open("Python_Test_File.txt","r+")
+...        str=fo.read() 
+...        str=str.replace("basketball","baseball")  
+...        print("We are replacing the file content with %s" % (str))  
+...        fo=open("Python_Test_File.txt","w+")  
+...        fo.write("%s"%(str))  
+...        fo.close()  
+...        fo=open("Python_Test_File.txt","r")  
+...        str=fo.read()
+...        print(str)                       
+... 
+We are replacing the file content with I love playing baseball
+23
+I love playing baseball
+
+
+
+>>> with open("Python_Test_File.txt","rt") as file:
+...      x=file.read()
+...     
+>>> with open("Python_Test_File.txt","wt") as file:
+...      x=x.replace("baseball","basketball")
+...      file.write(x)
+...      file.close()
+... 
+25
+>>> with open("Python_Test_File.txt","rt") as file:
+...      str=file.read()
+...      print(str)
+... 
+I love playing basketball
+
+
+
+>>> a="Hello, World!"
+>>> print(a.split(","))
+['Hello', ' World!']
+
+
+>>> a.split(",")[0]
+'Hello'
+>>> a.split(",")[1] 
+' World!'
+
+
+>>> for x in os.listdir('.'):
+...    if x=="Python_Test_File.txt": 
+...        fo=open("Python_Test_File.txt","r+")
+...        str=fo.read() 
+...        str=str.replace("basketball","baseball")  
+...        print("We are replacing the file content with %s" % (str))  
+...        fo=open("Python_Test_File.txt","w+")  
+...        fo.write("%s"%(str))  
+...        fo.close()  
+...        fo=open("Python_Test_File.txt","r")  
+...        str=fo.read()
+...        print(str)                       
+... 
+We are replacing the file content with I love playing baseball
+23
+I love playing baseball
+>>>
+>>> 
+>>> with open("Python_Test_File.txt","rt") as file:
+...      x=file.read()
+...     
+>>> with open("Python_Test_File.txt","wt") as file:
+...      x=x.replace("baseball","basketball")
+...      file.write(x)
+...      file.close()
+... 
+25
+>>> with open("Python_Test_File.txt","rt") as file:
+...      str=file.read()
+...      print(str)
+... 
+I love playing basketball
+>>>
+>>> 
+>>> a="Hello, World!"
+>>> print(a.split(","))
+['Hello', ' World!']
+>>>
+>>> print(a[0])
+H
+>>> a.split(",")[0]
+'Hello'
+>>> a.split(",")[1] 
+' World!'
+
+
+
+>>> a=os.getcwd()
+>>> a.split("\\")[0] 
+'C:'
+>>> a.split("\\")[1] 
+'Apps'
+>>> a.split("\\")[2] 
+'Python'
+
+
+==========
+
+>>> txt="I love to write python code in the stack class, sike"
+>>> x="sike" not in txt
+>>> print(x)
+False
+>>> x="sike" in txt     
+>>> print(x)
+True
+
+
+>>> txt="The rain in spain stays mainly in the plain"
+>>> if ain in txt:   
+...    print("The \"ain\" is in \"%s\""%(txt))
+
+
+
+>> def test_arg(b="magnificient"):
+...    x=b
+...    print("The argument passed is %s" %(x))
+... 
+>>> 
+>>> def test_arg(b="magnificient"):
+...   x=b
+...   print("The argument passed is %s" %(x))
+... 
+>>> test_arg()    
+The argument passed is magnificient
+
+
+
+>>> thislist=["apple","banana","cherry"]
+>>> print(thislist)   
+['apple', 'banana', 'cherry']
+>>>
+>>> print(thislist[0]) 
+apple
+>>> print(thislist[1]) 
+banana
+>>> print(thislist[2]) 
+cherry
+
+
+
+
+>>> thislist=["apple","banana","cherry"]
+>>> print(thislist)   
+['apple', 'banana', 'cherry']
+>>>
+>>> print(thislist[0]) 
+apple
+>>> print(thislist[1]) 
+banana
+>>> print(thislist[2]) 
+cherry
+>>> print(thislist[2:5]) 
+['cherry']
+
+
+>>> print(thislist)   
+['apple', 'banana', 'cherry', 'pineapple']
+>>>
+>>> print(thislist[1:3])
+['banana', 'cherry']
+>>>
+>>> print(thislist[1:])  
+['banana', 'cherry', 'pineapple']
+>>>
+
+
+>>> thislist2[0],thislist2[1],thislist2[2],thislist2[3]='Mango','Cucumber','Orange','Guava' 
+>>> 
+>>> print(thislist2)   
+['Mango', 'Cucumber', 'Orange', 'Guava']
+
+
+
+>>> thislist.insert(1, "orange")
+>>> print(thislist)
+['apple', 'orange', 'banana', 'cherry', 'pineapple']
+>>>
+>>> thislist.insert(0, "orange") 
+>>> 
+
+
+>>> print(thislist)      
+['orange', 'apple', 'orange', 'banana', 'cherry', 'pineapple']
+
+>>> del thislist[0] 
+>>> print(thislist)
+['apple', 'orange', 'banana', 'cherry', 'pineapple']
+>>>
+>>> thislist.pop()  
+'pineapple'
+>>> print(thislist)
+['apple', 'orange', 'banana', 'cherry']
+
+
+>>> thislist.clear() 
+>>> print(thislist)
+[]
