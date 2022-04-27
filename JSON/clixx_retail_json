@@ -1,0 +1,36 @@
+{
+	"CUSTOMER": [{
+		"CUST_ID": 11,
+		"FNAME": "JOHN",
+		"LNAME": "Jackson",
+		"Gender": "M",
+		"DOB": "24-NOV-83",
+		"EMAIL": "J.jackson@gmail.com"
+	}],
+	"DEMOGRAPHICS": [{
+		"CUST_ID": 11,
+		"ADDRES": "18 Connecticuit Avenue Washington DC",
+		"ADDRESS_TYPE": "B",
+		"DEFAULT": "Y"
+	}],
+	"CREDIT_CARD": [{
+		"CUST_ID": 11,
+		"CC_NO": 7593947236048937,
+		"CC_EXP": "JUN-2025",
+		"CC_CVV": 911,
+		"CC_TYPE": "Visa "
+	}],
+	"ORDERS": [{
+		"CUST_ID": 11,
+		"ORDER_STATUS": "On-hold",
+		"Delivery_Type": "Pickup",
+		"PROD_ID": 3219750,
+		"TRACK_ID": 947217
+	}],
+	"TRACKING": [{
+		"TRACK_NO": 28302821739,
+		"CUST_ID": 11,
+		"DELIVERY_Type": "Pickup",
+		"DELIVERY_DATE": "27-MAY-22"
+	}]
+}
