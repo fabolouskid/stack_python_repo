@@ -7,6 +7,7 @@ import os
 import json
 
 ####https://www.learnaws.org/2021/05/12/aws-iam-boto3-guide/
+####hands-on.cloud/working-with-iam-in-python-using-boto3/
 
 def aws_create_user(**args):
  try:
@@ -28,6 +29,16 @@ def aws_create_user(**args):
      password=input('Please provide new user password: ')
      response2 = iam.create_login_profile(Password=password,PasswordResetRequired=True,UserName=args['user'])
      print(response2['LoginProfile']['UserName'])
+
+     print("###################################################")
+     print("List all Current User in the AWS Account")
+     print("###################################################")
+     
+
+     paginator=iam.get_paginator('list_users')
+     for response3 in paginator.paginate():
+         for user in response3["Users"]:
+             print(f"Username: {user['UserName']}, Arn: {user['Arn']}")
 
  #    print(response['User']['UserName'])
  #    print(response['User']['Arn'])
@@ -59,7 +70,16 @@ def delete_aws_user(**args):
    iam=boto3.client(args['service'])
    response_del=iam.delete_login_profile(UserName=args['user'])
    iam.delete_user(UserName=args['user'])
-   response=iam.list_users()
+##   response=iam.list_users()
+
+   print("********************************************")
+   print("List all Current Users After user deletion")
+   print("********************************************")
+
+   paginator=iam.get_paginator('list_users')
+   for response3 in paginator.paginate():
+           for user in response3["Users"]:
+               print(f"Username: {user['UserName']}, Arn: {user['Arn']}")
 
 
 
@@ -115,12 +135,55 @@ def attach_user_to_group(**args):
      print(iam_attach_user_to_group)
    
 
+def aws_Iam_role(**args):
+     iam=boto3.client(args['service'])   #we are instantiating IAM CLASS
+     print("***********************************************")
+     print("Creating an IAM role with Policy attached to it")
+     print("*************************************************")
+    
+     assume_role_policy_document = json.dumps({
+    "Version": "2012-10-17",
+    "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::966876545122:root"
+            },
+            "Action": "sts:AssumeRole",
+            "Condition": {}
+          }
+       ]
+    })
+
+     iam_create_role=iam.create_role(RoleName=args['rolename'],AssumeRolePolicyDocument = assume_role_policy_document)
+     print(iam_create_role['Role']['RoleName'])
+
+     print("#############################################################################################")
+     print("Now that IAM role has been created with Trusted Entity,We going to attach Admin policy to it ")
+     print("#############################################################################################")
+
+     iam_role_with_policy_attached = iam.attach_role_policy(RoleName=args['rolename'],PolicyArn=policy_arn)
+     print(iam_role_with_policy_attached)
+     
+def aws_mfa(**args):
+     iam=boto3.client(args['service'])   #we are instantiating IAM CLASS
+     print("***********************************************")
+     print("Setting up MUltifactor Authentication for New/oldUser")
+
+##     iam_client.create_virtual_mfa_device(Path='/service-user/',VirtualMFADeviceName='kjh-SuperDuperUser')
+
 if __name__=="__main__":
-   val=input('Welcome to my IAM code: " + '"\n" + "Type add to create new user, Type del to delete user, Type pol to create new policy, Type grp to create new group, Type perm2grp to attach permission to group, Type user2grp to add user to group: ")
+   val=input('Welcome to my IAM code: " + '"\n" + "Type add to create new user, Type del to delete user, Type pol to create new policy, Type grp to create new group, Type perm2grp to attach permission to group, Type user2grp to add user to group, Type crt_role to create a role with a policy, Type mfa to setup security authentication for users: ")
    if val=='add':
        useradd=input('Enter user name: ')
        aws_create_user(service="iam",user=useradd)
    elif val=='del':
+       iam=boto3.client("iam")
+       paginator=iam.get_paginator('list_users')
+       for response3 in paginator.paginate():
+           for user in response3["Users"]:
+               print(f"Username: {user['UserName']}, Arn: {user['Arn']}")
+
        userdel=input('Enter username to delete: ')
        delete_aws_user(service="iam",user=userdel)
    elif val=='pol':
@@ -133,11 +196,17 @@ if __name__=="__main__":
         grp_name=input('Enter group Name to be attached to Policy: ')
         policy_arn=input('Enter Policy arn to be attached to : ')
         aws_attach_group_to_policy(service="iam",PolicyArn=policy_arn, group_name=grp_name)
-   else:
-        val=='user2grp'
+   elif val=='user2grp':
         grp_name=input('Enter group Name to add user into: ')
         user_name=input('Enter user Name to add to group: ')
         attach_user_to_group(service="iam",GroupName=grp_name,UserName=user_name)
+   elif val=='crt_role':
+        role_name=input('Enter Iam Role name to be created: ')
+        policy_arn=input('Enter Policy name to attach to Iam Role:')
+        aws_Iam_role(service="iam",rolename=role_name,PolicyArn=policy_arn)
+   else:
+        val=='mfa'
+        aws_mfa(service="iam")
 
          
   
